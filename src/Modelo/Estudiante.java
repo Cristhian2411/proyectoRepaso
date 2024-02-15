@@ -1,17 +1,34 @@
 package Modelo;
 
-public class Estudiante extends Persona {
-	String edad;
-	int nota1;
-	int nota2;
-	int nota3;
-	int nota4;
-	int promedio;
+import java.util.HashMap;
+import java.util.Map;
 
-	public Estudiante(String nombre, String apellido, String id, String edad, int nota1, int nota2, int nota3,
-			int nota4, int promedio) {
-		super(nombre, apellido, id);
-		// TODO Auto-generated constructor stub
+public class Estudiante extends Persona {
+    private int edad;
+    private int nota1;
+    private int nota2;
+    private int nota3;
+    private int nota4;
+    private int promedio;
+    private Map<String, Integer> calificaciones; // Incluido para manejar calificaciones por asignatura
+
+    public Estudiante(String nombre, String apellido, String id, int edad, int nota1, int nota2, int nota3, int nota4) {
+        super(nombre, apellido, id);
+        this.edad = edad;
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+        this.nota3 = nota3;
+        this.nota4 = nota4;
+        calificaciones = new HashMap<>(); // Inicialización del mapa
+        calcularPromedio(); // Asegura que el promedio se calcule correctamente al crear el objeto
+    }
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
 
 	public int getNota1() {
@@ -20,6 +37,7 @@ public class Estudiante extends Persona {
 
 	public void setNota1(int nota1) {
 		this.nota1 = nota1;
+		calcularPromedio();
 	}
 
 	public int getNota2() {
@@ -28,6 +46,7 @@ public class Estudiante extends Persona {
 
 	public void setNota2(int nota2) {
 		this.nota2 = nota2;
+		calcularPromedio();
 	}
 
 	public int getNota3() {
@@ -36,6 +55,7 @@ public class Estudiante extends Persona {
 
 	public void setNota3(int nota3) {
 		this.nota3 = nota3;
+		calcularPromedio();
 	}
 
 	public int getNota4() {
@@ -44,22 +64,26 @@ public class Estudiante extends Persona {
 
 	public void setNota4(int nota4) {
 		this.nota4 = nota4;
+		calcularPromedio();
 	}
 
 	public int getPromedio() {
 		return promedio;
 	}
 
-	public void setPromedio(int promedio) {
-		this.promedio = promedio;
+	// Nota: No hay setPromedio ya que este se calcula automáticamente.
+
+	private void calcularPromedio() {
+		this.promedio = (nota1 + nota2 + nota3 + nota4) / 4;
 	}
 
-	public String getEdad() {
-		return edad;
+	// Método para agregar o actualizar la calificación de una asignatura
+	public void agregarCalificacion(String codigoAsignatura, int calificacion) {
+		calificaciones.put(codigoAsignatura, calificacion);
 	}
 
-	public void setEdad(String edad) {
-		this.edad = edad;
+	// Método para obtener la calificación de una asignatura
+	public Integer obtenerCalificacion(String codigoAsignatura) {
+		return calificaciones.get(codigoAsignatura);
 	}
-
 }

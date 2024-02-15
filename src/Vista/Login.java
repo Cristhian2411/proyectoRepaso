@@ -45,7 +45,6 @@ public class Login extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("Iniciar Sesión");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 32));
-		lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(Box.createVerticalStrut(50)); // Espacio en blanco
 		panel.add(lblNewLabel);
 
@@ -68,6 +67,7 @@ public class Login extends JFrame {
 		panel.add(passwordField);
 
 		JButton botonIngresar = new JButton("Ingresar");
+		//botonIngresar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		botonIngresar.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		panel.add(Box.createVerticalStrut(20)); // Espacio en blanco
 		panel.add(botonIngresar);
@@ -93,39 +93,34 @@ public class Login extends JFrame {
 		panelImagenes.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Cristhian lopez\\Downloads\\logo.png"));
+		JLabel lblNewLabel_4 = new JLabel("logo.png");
 		lblNewLabel_4.setBounds(0, 0, 262, 175);
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Cristhian lopez\\Downloads\\logo.png"));
 		panel_1.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("New label");
+		JLabel lblNewLabel_5 = new JLabel("esto pa que");
 		lblNewLabel_5.setBounds(0, 173, 262, 141);
 		panel_1.add(lblNewLabel_5);
 
 		// Acción del botón Ingresar
-		botonIngresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String usuario = usuarioField.getText();
-				String password = new String(passwordField.getPassword());
+		botonIngresar.addActionListener(e -> {
+		    String usuario = usuarioField.getText();
+		    String password = new String(passwordField.getPassword());
 
-				if (usuario.isEmpty() || password.isEmpty()) {
-					JOptionPane.showMessageDialog(Login.this, "No puede existir un dato vacío o en blanco");
-				} else {
-					if (usuario.equals("1") && password.equals("2")) {
-						JOptionPane.showMessageDialog(Login.this, "Bienvenido");
-
-						// Abre la ventana llamada "Principal" para el usuario "CaSeLu"
-						if (usuario.equals("1")) {
-							MenuAdministrador principal = new MenuAdministrador();
-							principal.setVisible(true);
-							dispose();
-						}
-
-					} else {
-						JOptionPane.showMessageDialog(Login.this, "Contraseña o usuario incorrectos");
-					}
-				}
-			}
+		    if (usuario.isEmpty() || password.isEmpty()) {
+		        JOptionPane.showMessageDialog(Login.this, "No puede existir un dato vacío o en blanco");
+		    } else {
+		        if ("admin".equals(usuario) && "admin".equals(password)) { // Asegúrate de cambiar estas credenciales por las tuyas
+		            JOptionPane.showMessageDialog(Login.this, "Bienvenido");
+		            EventQueue.invokeLater(() -> {
+		                MenuAdministrador principal = new MenuAdministrador();
+		                principal.setVisible(true);
+		                Login.this.setVisible(false); // Oculta la ventana de login
+		            });
+		        } else {
+		            JOptionPane.showMessageDialog(Login.this, "Contraseña o usuario incorrectos");
+		        }
+		    }
 		});
 	}
 }
