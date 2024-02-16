@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class MenuAdministrador extends JFrame {
 
@@ -34,14 +35,14 @@ public class MenuAdministrador extends JFrame {
 
     public MenuAdministrador() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 452, 477);
+        setBounds(100, 100, 430, 396);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
         // Panel de botones
         JPanel panelBotones = new JPanel();
-        panelBotones.setBounds(5, 5, 401, 425);
+        panelBotones.setBounds(5, 5, 401, 342);
         JButton botonADocente = new JButton("Añadir Docente");
         botonADocente.setBounds(197, 109, 160, 35);
         botonADocente.addActionListener(this::accionAnadirDocente);
@@ -67,16 +68,23 @@ public class MenuAdministrador extends JFrame {
         contentPane.add(panelBotones);
         
         BIENVENIDO = new JTextField();
+        BIENVENIDO.setHorizontalAlignment(SwingConstants.CENTER);
         BIENVENIDO.setFont(new Font("Tahoma", Font.PLAIN, 17));
         BIENVENIDO.setText("BIENVENIDO ADMINISTRADOR");
-        BIENVENIDO.setBounds(10, 10, 256, 44);
+        BIENVENIDO.setBounds(60, 10, 256, 44);
         panelBotones.add(BIENVENIDO);
         BIENVENIDO.setColumns(10);
 
         // Botón Atrás
         JButton btnAtras = new JButton("Atrás");
-        btnAtras.setBounds(10, 404, 150, 21);
+        btnAtras.setBounds(0, 313, 150, 21);
         panelBotones.add(btnAtras);
+        
+        JLabel lblNewLabel = new JLabel("¿Que desea hacer?");
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        lblNewLabel.setBounds(125, 64, 140, 35);
+        panelBotones.add(lblNewLabel);
         btnAtras.addActionListener(e -> {
             Login login = new Login();
             login.setVisible(true);
@@ -107,5 +115,4 @@ public class MenuAdministrador extends JFrame {
         ventanaListarEstudiantes.setVisible(true);
         this.setVisible(true); // Opcional: Oculta la ventana actual
     }
-    
 }
