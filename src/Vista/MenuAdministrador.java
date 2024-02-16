@@ -12,11 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import java.awt.Font;
 
 public class MenuAdministrador extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
+    private JTextField BIENVENIDO;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -35,36 +38,50 @@ public class MenuAdministrador extends JFrame {
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-        contentPane.setLayout(new BorderLayout(10, 10));
 
         // Panel de botones
-        JPanel panelBotones = new JPanel(new GridLayout(5, 1, 5, 5));
+        JPanel panelBotones = new JPanel();
+        panelBotones.setBounds(5, 5, 401, 425);
         JButton botonADocente = new JButton("Añadir Docente");
+        botonADocente.setBounds(197, 109, 160, 35);
         botonADocente.addActionListener(this::accionAnadirDocente);
+        panelBotones.setLayout(null);
         panelBotones.add(botonADocente);
 
         JButton botonAestudiante = new JButton("Añadir Estudiantes");
+        botonAestudiante.setBounds(0, 109, 160, 35);
         botonAestudiante.addActionListener(this::accionAnadirEstudiante);
         panelBotones.add(botonAestudiante);
 
         JButton btnListarDocentes = new JButton("Listar Docentes");
+        btnListarDocentes.setBounds(197, 175, 160, 35);
         btnListarDocentes.addActionListener(this::accionListarDocentes);
         panelBotones.add(btnListarDocentes);
 
         JButton btnListarEstudiantes = new JButton("Listar Estudiantes");
+        btnListarEstudiantes.setBounds(0, 171, 160, 43);
         btnListarEstudiantes.addActionListener(this::accionListarEstudiantes);
+        contentPane.setLayout(null);
         panelBotones.add(btnListarEstudiantes);
 
-        contentPane.add(panelBotones, BorderLayout.CENTER);
+        contentPane.add(panelBotones);
+        
+        BIENVENIDO = new JTextField();
+        BIENVENIDO.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        BIENVENIDO.setText("BIENVENIDO ADMINISTRADOR");
+        BIENVENIDO.setBounds(10, 10, 256, 44);
+        panelBotones.add(BIENVENIDO);
+        BIENVENIDO.setColumns(10);
 
         // Botón Atrás
         JButton btnAtras = new JButton("Atrás");
+        btnAtras.setBounds(10, 404, 150, 21);
+        panelBotones.add(btnAtras);
         btnAtras.addActionListener(e -> {
             Login login = new Login();
             login.setVisible(true);
             dispose();
         });
-        contentPane.add(btnAtras, BorderLayout.SOUTH);
     }
 
     private void accionAnadirDocente(ActionEvent e) {
@@ -82,13 +99,13 @@ public class MenuAdministrador extends JFrame {
     private void accionListarDocentes(ActionEvent e) {
         ListarDocentes ventanaListarDocentes = new ListarDocentes(); // Asume que esta es tu clase para listar docentes
         ventanaListarDocentes.setVisible(true);
-        this.setVisible(false); // Opcional: Oculta la ventana actual
+        this.setVisible(true); // Opcional: Oculta la ventana actual
     }
 
     private void accionListarEstudiantes(ActionEvent e) {
         ListarEstudiantes ventanaListarEstudiantes = new ListarEstudiantes(); // Asume que esta es tu clase para listar estudiantes
         ventanaListarEstudiantes.setVisible(true);
-        this.setVisible(false); // Opcional: Oculta la ventana actual
+        this.setVisible(true); // Opcional: Oculta la ventana actual
     }
-
+    
 }
